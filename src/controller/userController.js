@@ -52,9 +52,17 @@ exports.user_addNewUser = function(req, res) {
     let userInformation = new UserInformation(userRegister);
     userInformation.save()
         .then(userInformation => {
+            console.log(res)
             res.status(200).json(true);
         })
         .catch(err => {
-            res.status(400).send(err);
+            if(err.code === 11000){
+                var error = new Error('11000')
+                res.send('11000');
+            }else{
+                var error = new Error('11000')
+                res.send('Error');
+            }
+            
         });
 };
